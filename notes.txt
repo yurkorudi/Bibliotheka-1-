@@ -1,0 +1,87 @@
+book structure: 
+        name: ...
+        publisher: ...
+        date publish ...
+        rate: ...
+
+user structure:
+        first name: ...
+        last name: ...
+        age: ...
+        phone nomber: ...
+
+
+
+json structure:
+
+str(self.id) + "|" + self.name + "|" + self.publisher + "|" + self.date + "|" + self.autors
+
+
+
+{
+    "id" : "id"
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    # def list(self):
+ 
+
+    #     if self.lines == []:
+    #         print('list is empty, add some books')
+    #         print('add books = 0')
+    #         print('exid = 1')
+    #         self.menu_answer_in_list = int(input('>  '))
+    #         if self.menu_answer_in_list == 0:
+    #             self.write_line()
+    #         if self.menu_answer_in_list == 1:
+    #             self.main_menu()
+
+            
+    #     else: 
+    #         print('exid = 0')
+    #         print('del books = 1')
+    #         self.menu_answer_in_list = int(input('>  '))
+    #         if self.menu_answer_in_list == 0:
+    #             self.main_menu()
+    #         if self.menu_answer_in_list == 1:
+    #             self.del_book()
+
+
+
+
+
+        if len(self.users_list[int(answer) - 1].books) == 1:
+            print(book.books[self.users_list[int(answer)-1].books].name)
+        elif len(self.users_list[int(answer)-1].books)  > 1:
+            for obj in answer:
+                print(book.books[self.users_list[int(answer)-1].books[obj]].name)
+
+
+
+
+
+
+

@@ -1,0 +1,1 @@
+9[{"id": 1, "name": "sdf", "publisher": "sad", "date": "fasdf", "autors": "sadf"}, {"id": 2, "name": "tdy", "publisher": "sty", "date": "rty", "autors": "ery"}]
