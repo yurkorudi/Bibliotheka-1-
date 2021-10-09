@@ -9,12 +9,23 @@ class Menu:
             print('##   Main Menu   ##')
             print('  0: users')
             print('  1: books')
-            self.book_or_us = (int(input('>  ')))
-            if self.book_or_us <= 1 and self.book_or_us >= 0:
-                if self.book_or_us == 1:
-                    book.book_menu()
+            try:
+                self.book_or_us = int(input('>  '))
+            except ValueError:
+                print('''NO-NO-NO, it's not an answer!''')
+                self.main_menu(book, users)
+                break                
+            if type(self.book_or_us) == int:
+                self.book_or_us = int(self.book_or_us)
+                if self.book_or_us == 1 or self.book_or_us == 0:
+                    if self.book_or_us == 1:
+                        book.book_menu()
+                    else:
+                        users.user_menu()
                 else:
-                    users.user_menu()
+                    print('''NO-NO-NO, it's not an answer!''')
+                    self.main_menu(book, users)
+                    break
             else:
                 print('''NO-NO-NO, it's not an answer!''')
                 self.main_menu(book, users)

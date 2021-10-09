@@ -8,16 +8,16 @@ class User:
     last_name = ''
     age = ''
     adress = ''
-    nomber = ''
+    number = ''
     books = ''
 
-    def __init__(self, id, first_name, last_name, age, adress, nomber, books):
+    def __init__(self, id, first_name, last_name, age, adress, number, books):
         self.id = id
         self.first_name = first_name
         self.last_name = last_name
         self.age = age
         self.adress = adress
-        self.nomber = nomber
+        self.number = number
         self.books = books
 
 
@@ -26,11 +26,11 @@ class User:
     #     for i in self.books:
     #         book = book + str(i) + ' '
 
-    #     return str(self.id) + '|' + self.first_name + '|' + self.last_name + '|' + str(self.age) + '|' + str(self.adress) + '|' + str(self.nomber) + '|' + book
+    #     return str(self.id) + '|' + self.first_name + '|' + self.last_name + '|' + str(self.age) + '|' + str(self.adress) + '|' + str(self.number) + '|' + book
 
 
     def print_user(self):
-        print(str(self.id) + '    ' + self.first_name + ' ' + self.last_name + ' ' + str(self.age) + ' ' + str(self.adress) + '|' + str(self.nomber))
+        print(str(self.id) + '    ' + self.first_name + ' ' + self.last_name + ' ' + str(self.age) + ' ' + str(self.adress) + '|' + str(self.number))
 
 
 
@@ -77,7 +77,12 @@ class Users:
         print('   4: Print list user > book')
         print('   5: EXIT')
 
-        self.menu_answer = int(input('>   '))
+        try:
+            self.menu_answer = int(input('>   '))
+        except ValueError:
+            print('''NO-NO-NO, it's not an answer!''')
+            self.user_menu()
+
 
         if self.menu_answer <= 5 and self.menu_answer >= 0:
 
@@ -110,14 +115,20 @@ class Users:
 
     def add_user(self):
         id = len(self.users_list) + 1
+        list_to_exit = []
 
-        first_name = str(input('Enter first name:  '))
+        first_name = str(input('Enter first name:  or to exit enter 0:  '))
+        try:
+            if int(first_name) == 0:
+                return
+        except ValueError:
+            pass
         last_name = str(input('Enter last name:  '))
         print('Enter age:  ')
         age = self.ask.func_()
         adress = str(input('Enter adress:  '))
-        print('Enter nomber:   ')
-        nomber = self.ask.func_()
+        print('Enter number:   ')
+        number = self.ask.func_()
         books = str(input('Id of books (if not, press enter)'))
 
         if books == '/n':
@@ -131,7 +142,7 @@ class Users:
         
         
 
-        user = User(id, first_name, last_name, age, adress, nomber, books)
+        user = User(id, first_name, last_name, age, adress, number, books)
         self.users_list.append(user)
         self.save_users()
         self.user_menu()
@@ -143,9 +154,14 @@ class Users:
 
     def del_user(self):
         self.print_user()
-        print('Enter nomber of element you want to delete>')
-        nomber = self.ask.func_()
-        del self.users_list[nomber-1]
+        print('Enter number of element you want to delete> or to exit enter 0:  ')
+        number = self.ask.func_()
+        try:
+            if int(number) == 0:
+                return
+        except ValueError:
+            pass
+        del self.users_list[number-1]
         self.save_users()
         self.user_menu()
 
@@ -184,7 +200,7 @@ class Users:
         self.line = self.insert(self.line, 60, '+')
         self.line = self.insert(self.line, 61, 'adress')
         self.line = self.insert(self.line, 75, '+')
-        self.line = self.insert(self.line, 76, 'nomber')
+        self.line = self.insert(self.line, 76, 'number')
         self.line = self.insert(self.line, 90, '+')
         print(self.line)
 
@@ -214,7 +230,7 @@ class Users:
             self.line = self.insert(self.line, 60, '+')
             self.line = self.insert(self.line, 61, str(user.adress))
             self.line = self.insert(self.line, 75, '+')
-            self.line = self.insert(self.line, 76, str(user.nomber))
+            self.line = self.insert(self.line, 76, str(user.number))
             self.line = self.insert(self.line, 90, '+')
             print(self.line)
 

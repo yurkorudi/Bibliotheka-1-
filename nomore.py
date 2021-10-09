@@ -1,39 +1,32 @@
 
 class No_more:
-    def __init__(self):
-        self.special_list = ['age', 'date', 'none']
-
-    def chek(self, min, max, special):
-        self.min = min
+    def __init__(self, max, min):
         self.max = max
-        self.special = special
-        if self.special == self.special_list[0]:
-            self.age()
-
-        elif self.special == self.special_list[1]:
-            self.date()
+        self.min = min 
+        self.chek()
 
 
-    def age(self):
-        self.variable = None
-        print('Enter number from 0 - 125:')
-        try:
-            self.variable = int(input('>   '))
 
-            if self.variable > 0 and self.variable <= 125:
-                return self.variable
 
+
+    def chek(self):    
+        self.a = input("Enter: ")
+        if type(self.a) == int:
+            if self.a >= self.min and self.a <= self.max:
+                pass
             else:
-                print("It's a false age. Please try to enter real age.")
-                self.age()
+                print("Wrong answer. Try again")
+                self.chek()
+        else:
+            print("Mistake answer. Try some int")
+            self.chek()
 
-        except ValueError:
-            print("It's not an age.Pleasy try again with real age.")
-            self.age()
 
 
-    def date(self):
-        pass
+
+
+
+
 
 ### доробити ####################################################################################################################################################################################
 
