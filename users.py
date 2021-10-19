@@ -120,7 +120,7 @@ class Users:
         first_name = str(input('Enter first name:  or to exit enter 0:  '))
         try:
             if int(first_name) == 0:
-                return
+                self.user_menu()
         except ValueError:
             pass
         last_name = str(input('Enter last name:  '))
@@ -276,7 +276,8 @@ class Users:
 
         print('Enter user id, or enter 0 to skip>')
         answer = self.ask.func_()
-        if answer == 0:
+
+        if int(answer) == 0:
             answer = None
             self.user_menu()
 
@@ -284,17 +285,19 @@ class Users:
 
 
         for us in self.users_list:
-            if us.id == str(answer):
-                if len(us.books) == 1:
-                    print('This books for: ' + str(self.users_list[answer - 1]) + self.book.books[self.users_list[answer - 1]].name)
-
-                elif len(us.books) > 1:
+            if us.id == answer:
+                if len(us.books) > 0:
                     for id_book in us.books:
+                        id_book = list(id_book.split(","))
                         for obj1 in self.book.books:
-                            if obj1.id == id_book:
-                                print('Here you have:' + obj1.name)
+                            for var in id_book:
+                                try:
+                                    if obj1.id == int(var):
+                                        print('Here you have: ' + obj1.name)
+                                except ValueError:
+                                    print('This user is empty')
 
-                elif len(us.books) == 0:
+                else:
                     print('This user is empty')
             
 
