@@ -302,8 +302,10 @@ class Books:
         for us in Users.users_list:
             us.books = list(us.books[0].split(","))
             for chek in us.books:
-                if int(chek) == id:
-                    resoult = resoult + us.first_name + ' ' + us.last_name
+                if chek != '':
+                    if int(chek) == id:
+                        resoult = resoult + us.first_name + ' ' + us.last_name
+                
         
         if resoult == ' ':
             resoult = 'Anybody'

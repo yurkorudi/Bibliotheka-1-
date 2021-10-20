@@ -7,7 +7,7 @@
         "adress": "egnb34",
         "number": 35965,
         "books": [
-            "1,2"
+            "1"
         ]
     },
     {
@@ -18,7 +18,7 @@
         "adress": "fdw",
         "number": 12345567,
         "books": [
-            "1,2"
+            "1"
         ]
     },
     {
@@ -30,6 +30,17 @@
         "number": 234,
         "books": [
             "1"
+        ]
+    },
+    {
+        "id": 4,
+        "first_name": "Yura",
+        "last_name": "Pistun",
+        "age": 14,
+        "adress": "adress",
+        "number": 234567890,
+        "books": [
+            ""
         ]
     }
 ]
