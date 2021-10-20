@@ -31,7 +31,8 @@ class User:
 
 
     def print_user(self):
-        print(str(self.id) + '    ' + self.first_name + ' ' + self.last_name + ' ' + str(self.age) + ' ' + str(self.adress) + '|' + str(self.number))
+        a = (str(self.id) + '    ' + self.first_name + ' ' + self.last_name + ' ' + str(self.age) + ' ' + str(self.adress) + '|' + str(self.number))
+        print(json.dumps(a, indent=4, sort_keys=True))
 
 
 
@@ -128,7 +129,7 @@ class Users:
         print('Enter age:  ')
         age = self.ask.func_()
         adress = str(input('Enter adress:  '))
-        print('Enter number:   ')
+        print('Enter phone number:   ')
         number = self.ask.func_()
         books = str(input('Id of books (if not, press enter)'))
 
@@ -177,20 +178,20 @@ class Users:
 
 
         first_name_int = self.users_list[number-1].first_name
-        name = str(input('enter new name (old name {}): '.format(first_name_int)))
+        name = str(input('enter new first name (old name {}): '.format(first_name_int)))
         if len(name) != 0:
             first_name_int = name
 
 
         last_name_int = self.users_list[number-1].last_name
-        name = str(input('enter new name (old name {}): '.format(last_name_int)))
+        name = str(input('enter new last name (old name {}): '.format(last_name_int)))
         if len(name) != 0:
             last_name_int = name
 
 
         age_int = self.users_list[number-1].age
         try:
-            age = int(input('enter new name (old name {}): '.format(age_int)))
+            age = int(input('enter new age (old name {}): '.format(age_int)))
         except ValueError:
             print("wrong age. Enter real!")
             self.change_user()
@@ -199,14 +200,14 @@ class Users:
 
 
         adress_int = self.users_list[number-1].adress
-        adress = str(input('enter new name (old name {}): '.format(first_name_int)))
+        adress = str(input('enter new adress (old name {}): '.format(first_name_int)))
         if len(name) != 0:
             adress_int = adress
 
         
         number_int = self.users_list[number-1].number
         try:
-            number = int(input('enter new name (old name {}): '.format(number_int)))
+            number = int(input('enter new phone number (old name {}): '.format(number_int)))
         except ValueError:
             print("wrong number. Enter real!")
             self.change_user()
@@ -215,7 +216,7 @@ class Users:
 
 
         books_int = self.users_list[number-1].books
-        books = str(input('enter new name (old name {}): '.format(books_int)))
+        books = str(input('enter new books (old name {}): '.format(books_int)))
         if len(books) != 0:
             books_int = books
 
@@ -232,6 +233,8 @@ class Users:
 
 
     def insert(self, s, index, value):
+        if len(value) > 9:
+            value = value[0:9]
         return  s[:index] + value + s[index:]
 
 
@@ -261,7 +264,7 @@ class Users:
         self.line = self.insert(self.line, 60, '+')
         self.line = self.insert(self.line, 61, 'adress')
         self.line = self.insert(self.line, 75, '+')
-        self.line = self.insert(self.line, 76, 'number')
+        self.line = self.insert(self.line, 76, 'phone number')
         self.line = self.insert(self.line, 90, '+')
         print(self.line)
 
@@ -315,14 +318,9 @@ class Users:
             user_dict.append(user.__dict__)
 
         with open('user.txt', 'w') as outfile:
-            json.dump(user_dict, outfile)
+            a = json.dumps(user_dict, indent=4)
+            json.dump(a, outfile)
 
-
-        # with open('user.txt', 'w') as file:
-        #     for user in self.users_list:
-        #         file.write(user.create_line() + '\n')
-
-        # file.close()
 
     def split(self, word):
         return [char for char in word]

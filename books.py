@@ -58,6 +58,8 @@ class Books:
 
 
     def insert(self, s, index, value):
+        if len(value) > 9:
+            value = value[0:9]
         return  s[:index] + value + s[index:]
 
 
@@ -66,20 +68,21 @@ class Books:
     def print_book(self):
 
 
-        self.line =  '---------------------------------------------'
+        self.line =  '------------------------------------------------------'
 
         self.line = self.insert(self.line, 0, '+')
         self.line = self.insert(self.line, 10, '+')
         self.line = self.insert(self.line, 20, '+')
         self.line = self.insert(self.line, 30, '+')
         self.line = self.insert(self.line, 40, '+')
-        self.line = self.insert(self.line, 51, '+')
+        self.line = self.insert(self.line, 50, '+')
+        self.line = self.insert(self.line, 61, '+')
 
         print(self.line)
 
 
 
-        self.line =  '                    '
+        self.line =  '                                  '
 
         self.line = self.insert(self.line, 0, '|')
         self.line = self.insert(self.line, 1, 'id')
@@ -92,26 +95,29 @@ class Books:
         self.line = self.insert(self.line, 40, '|')
         self.line = self.insert(self.line, 41, 'autors')
         self.line = self.insert(self.line, 50, '|')
+        self.line = self.insert(self.line, 51, 'Owner')
+        self.line = self.insert(self.line, 60, '|')
 
         print(self.line)
 
 
 
-        self.line =  '---------------------------------------------'
+        self.line =  '------------------------------------------------------'
 
         self.line = self.insert(self.line, 0, '+')
         self.line = self.insert(self.line, 10, '+')
         self.line = self.insert(self.line, 20, '+')
         self.line = self.insert(self.line, 30, '+')
         self.line = self.insert(self.line, 40, '+')
-        self.line = self.insert(self.line, 51, '+')
+        self.line = self.insert(self.line, 50, '+')
+        self.line = self.insert(self.line, 61, '+')
 
         print(self.line)
         #+rrr
         for book in self.books:
             bookwithn = book.autors
             bookwithn = bookwithn.strip('\n')
-            self.line =  '                                        '
+            self.line =  '                                                         '
 
             self.line = self.insert(self.line, 0, '+')
             self.line =self.insert(self.line,  1, str(book.id))
@@ -124,17 +130,20 @@ class Books:
             self.line =self.insert(self.line, 40, '+')
             self.line =self.insert(self.line, 41, book.autors)
             self.line =self.insert(self.line, 50, '+')
+            self.line =self.insert(self.line, 51, self.look_for_table(book))
+            self.line =self.insert(self.line, 60, '+')
 
             print(self.line)
 
-        self.line =  '---------------------------------------------'
+        self.line =  '------------------------------------------------------'
 
         self.line = self.insert(self.line, 0, '+')
         self.line = self.insert(self.line, 10, '+')
         self.line = self.insert(self.line, 20, '+')
         self.line = self.insert(self.line, 30, '+')
         self.line = self.insert(self.line, 40, '+')
-        self.line = self.insert(self.line, 51, '+')
+        self.line = self.insert(self.line, 50, '+')
+        self.line = self.insert(self.line, 60, '+')
 
         print(self.line)
 
@@ -289,8 +298,8 @@ class Books:
 
 
     def look_for_user(self):
-        self.print_book()
 
+        self.print_book()
         print("Enter number of book, you want to look> or to exit enter 0>   ")
         number = self.ask.func_()
         try:
@@ -310,19 +319,32 @@ class Books:
             elif len(us.books) == 1:
                 if int(us.books[0]) == id:
                     print(us.first_name + " " + us.last_name)
-            
 
-            
-
-
-
-
-
-
-            # for us in Users.users_list:
-            #     us.books = list(us.books[0].split(",")) 
-            #     for a in us.books:
-            #         if bk.id == int(a):
-            #             print(us.first_name + " " + us.last_name)
-        
         self.book_menu()
+
+
+
+
+    def look_for_table(self, book):
+        resoult = ' '
+        target = book
+        
+        id = self.books[target.id-1].id
+
+        for us in Users.users_list:
+            us.books = list(us.books[0].split(","))
+            for chek in us.books:
+                if int(chek) == id:
+                    resoult = resoult + us.first_name + ' ' + us.last_name
+        
+        if resoult == ' ':
+            resoult = 'Anybody'
+
+        return resoult
+
+
+
+
+
+
+
