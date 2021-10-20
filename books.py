@@ -171,7 +171,7 @@ class Books:
             print('''Maybe you entered some str symbol's, try with out it''')
             self.book_menu()
 
-        if self.menu_answer <= 5 and self.menu_answer >= 0:
+        if self.menu_answer <= 4 and self.menu_answer >= 0:
             if self.menu_answer == 0:
                 return
             
@@ -188,8 +188,7 @@ class Books:
                 self.print_book()
                 self.book_menu()
 
-            if self.menu_answer == 5:
-                self.look_for_user()
+
 
         else:
             print('''NO-NO-NO, it's not an answer!''')
@@ -267,30 +266,6 @@ class Books:
         self.book_menu()
 
 
-    def look_for_user(self):
-
-        self.print_book()
-        print("Enter number of book, you want to look> or to exit enter 0>   ")
-        number = self.ask.func_()
-        try:
-            if int(number) == 0:
-                return
-        except ValueError:
-            pass
-
-        id = self.books[number-1].id
-
-        for us in Users.users_list:
-            us.books = list(us.books[0].split(","))
-            if len(us.books) > 1:
-                for i in us.books:
-                    if int(i) == id:
-                        print(us.first_name + " " + us.last_name)
-            elif len(us.books) == 1:
-                if int(us.books[0]) == id:
-                    print(us.first_name + " " + us.last_name)
-
-        self.book_menu()
 
 
     def look_for_table(self, book):
