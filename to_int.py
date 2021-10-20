@@ -11,7 +11,9 @@ class To_int_ask:
             return self.a
         except ValueError:
             print('''Maybe you entered some str symbol's, try with out it''')
-            self.func_()
+            ret = self.func_()
+            return ret
+
 
             
 
