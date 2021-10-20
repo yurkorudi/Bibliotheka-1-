@@ -1,5 +1,6 @@
 import json
 from to_int import To_int_ask
+from users import Users
 to_int = To_int_ask()
 
 
@@ -137,10 +138,6 @@ class Books:
 
         print(self.line)
 
-        
-            #print(str(book.id) + ":     " + book.name + " " + book.publisher + " " + str(book.date) + " " + book.autors)
-        #self.book_menu()
-
 
 
     def find_book(self, id):
@@ -176,6 +173,7 @@ class Books:
         print('  2: Change book')
         print('  3: Delete')
         print('  4: EXIT')
+        print('  5: look user')
 
         try:
             self.menu_answer = int(input(">  "))
@@ -183,7 +181,7 @@ class Books:
             print('''Maybe you entered some str symbol's, try with out it''')
             self.book_menu()
 
-        if self.menu_answer <= 4 and self.menu_answer >= 0:
+        if self.menu_answer <= 5 and self.menu_answer >= 0:
             if self.menu_answer == 0:
                 self.print_book()
                 self.book_menu()
@@ -199,6 +197,9 @@ class Books:
 
             if self.menu_answer == 4:
                 return
+
+            if self.menu_answer == 5:
+                self.look_for_user()
 
         else:
             print('''NO-NO-NO, it's not an answer!''')
@@ -282,4 +283,27 @@ class Books:
         del self.books[number-1]
         self.save_to_file()
         self.book_menu()
+        self.book_menu()
+
+
+
+
+    def look_for_user(self):
+        self.print_book()
+
+        print("Enter nomber of book, you want to look> or to exit enter 0>   ")
+        nomber = self.ask.func_()
+        try:
+            if int(nomber) == 0:
+                return
+        except ValueError:
+            pass
+
+        for bk in self.books:
+            for us in Users.users_list:
+                us.books = list(us.books[0].split(","))
+                for a in us.books:
+                    if bk.id == int(a):
+                        print(us.first_name + " " + us.last_name)
+        
         self.book_menu()
