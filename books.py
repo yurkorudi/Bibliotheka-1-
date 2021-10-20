@@ -1,4 +1,6 @@
 import json
+from to_int import To_int_ask
+to_int = To_int_ask()
 
 
 class Book:
@@ -174,8 +176,12 @@ class Books:
         print('  2: Change book')
         print('  3: Delete')
         print('  4: EXIT')
-        self.menu_answer = int(input('>  '))
 
+        try:
+            self.menu_answer = int(input(">  "))
+        except ValueError:
+            print('''Maybe you entered some str symbol's, try with out it''')
+            self.book_menu()
 
         if self.menu_answer <= 4 and self.menu_answer >= 0:
             if self.menu_answer == 0:

@@ -2,6 +2,7 @@ import json
 
 
 
+
 class User:
     id = ''
     first_name = ''
@@ -166,7 +167,67 @@ class Users:
         self.user_menu()
 
     def change_user(self):
-        pass
+        self.print_user()
+        number = self.ask.func_()
+        try:
+            if int(number) == 0:
+                return
+        except ValueError:
+            pass
+
+
+        first_name_int = self.users_list[number-1].first_name
+        name = str(input('enter new name (old name {}): '.format(first_name_int)))
+        if len(name) != 0:
+            first_name_int = name
+
+
+        last_name_int = self.users_list[number-1].last_name
+        name = str(input('enter new name (old name {}): '.format(last_name_int)))
+        if len(name) != 0:
+            last_name_int = name
+
+
+        age_int = self.users_list[number-1].age
+        try:
+            age = int(input('enter new name (old name {}): '.format(age_int)))
+        except ValueError:
+            print("wrong age. Enter real!")
+            self.change_user()
+        if len(age) != 0:
+            age_int = age
+
+
+        adress_int = self.users_list[number-1].adress
+        adress = str(input('enter new name (old name {}): '.format(first_name_int)))
+        if len(name) != 0:
+            adress_int = adress
+
+        
+        nomber_int = self.users_list[number-1].nomber
+        try:
+            nomber = int(input('enter new name (old name {}): '.format(nomber_int)))
+        except ValueError:
+            print("wrong nomber. Enter real!")
+            self.change_user()
+        if len(nomber) != 0:
+            nomber_int = nomber
+
+
+        books_int = self.users_list[number-1].books
+        books = str(input('enter new name (old name {}): '.format(books_int)))
+        if len(books) != 0:
+            books_int = books
+
+
+        user = User(id, first_name_int, last_name_int, age_int, adress_int, nomber_int, books_int)
+        self.users_list.append(user)
+        self.save_users()
+        self.user_menu()
+
+
+
+
 
 
 
@@ -218,7 +279,7 @@ class Users:
 
         for user in self.users_list:
 
-            self.line =  '                                                                                '
+            self.line =  '                                                                                     '
             self.line = self.insert(self.line, 0, '+')
             self.line = self.insert(self.line,1, (str(user.id)))
             self.line = self.insert(self.line, 15, '+')
@@ -231,7 +292,7 @@ class Users:
             self.line = self.insert(self.line, 61, str(user.adress))
             self.line = self.insert(self.line, 75, '+')
             self.line = self.insert(self.line, 76, str(user.number))
-            self.line = self.insert(self.line, 90, '+')
+            self.line = self.insert(self.line, 95, '+')
             print(self.line)
 
 
@@ -298,7 +359,7 @@ class Users:
                                     print('This user is empty')
 
                 else:
-                    print('This user is empty')
+                    print('This user is empty') 
             
 
 
