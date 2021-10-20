@@ -105,6 +105,9 @@ class Users:
         last_name = str(input('Enter last name:  '))
         print('Enter age:  ')
         age = self.ask.func_()
+        if age > 100 or age < 3:
+            print('Wrong age. Please try with real.')
+            self.add_user() 
         adress = str(input('Enter adress:  '))
         print('Enter phone number:   ')
         number = self.ask.func_()
