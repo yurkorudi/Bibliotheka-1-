@@ -1,1 +1,35 @@
-[{"id": 2, "first_name": "Pra", "last_name": "Rap", "age": 15, "adress": "egnb34", "number": 35965, "books": ["1,2"]}, {"id": 3, "first_name": "1", "last_name": "2", "age": null, "adress": "fdw", "number": 12345567, "books": ["1,2"]}]
+[
+    {
+        "id": 2,
+        "first_name": "Pra",
+        "last_name": "Rap",
+        "age": 15,
+        "adress": "egnb34",
+        "number": 35965,
+        "books": [
+            "1,2"
+        ]
+    },
+    {
+        "id": 3,
+        "first_name": "1",
+        "last_name": "2",
+        "age": null,
+        "adress": "fdw",
+        "number": 12345567,
+        "books": [
+            "1,2"
+        ]
+    },
+    {
+        "id": 3,
+        "first_name": "sfgh",
+        "last_name": "dg",
+        "age": 2345,
+        "adress": "jhg",
+        "number": 234,
+        "books": [
+            "1"
+        ]
+    }
+]

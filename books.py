@@ -3,7 +3,6 @@ from to_int import To_int_ask
 from users import Users
 to_int = To_int_ask()
 
-
 class Book:
     id = ""
     name = ""
@@ -18,18 +17,8 @@ class Book:
         self.date = date
         self.autors = autors
 
-    # def create_line(self):
-    #     a = {"id" : str(self.id), "name" : self.name,  "publisher" : self.publisher, "date" : str(self.date), "autors" : self.autors}
-    #     return json.dumps(a, indent=4, sort_keys=True)
-    
     def insert(self, s, index, value):
         return  s[:index] + value + s[index:]
-
-
-
-
-
-
 
 class Books:
 
@@ -41,16 +30,13 @@ class Books:
         self.load_from_file()
 
 
-
-
-
-
     def load_from_file(self):
 
         lines = []
         file = open('book.txt')
         data = json.load(file)
       
+
         for obg in data:
 
             book = Book(obg["id"], obg["name"], obg["publisher"], obg["date"], obg["autors"])
@@ -61,8 +47,6 @@ class Books:
         if len(value) > 9:
             value = value[0:9]
         return  s[:index] + value + s[index:]
-
-
 
 
     def print_book(self):
@@ -148,7 +132,6 @@ class Books:
         print(self.line)
 
 
-
     def find_book(self, id):
         answer = []
         for book in self.books:
@@ -160,8 +143,6 @@ class Books:
         return answer
         
 
-
-
     def save_to_file(self):
 
 
@@ -171,17 +152,17 @@ class Books:
             books_dic.append(book.__dict__)
 
         with open('book.txt', 'w') as outfile:
-            json.dump(books_dic, outfile)
+            json.dump(books_dic, outfile, indent=4)
 
 
     def book_menu(self):
         global menu
         print('##   Menu  ###')
-        print('  0: List of books')
+        print('  0: EXIT')
         print('  1: Add book')
         print('  2: Change book')
         print('  3: Delete')
-        print('  4: EXIT')
+        print('  4: List of books')
         print('  5: look user')
 
         try:
@@ -192,8 +173,7 @@ class Books:
 
         if self.menu_answer <= 5 and self.menu_answer >= 0:
             if self.menu_answer == 0:
-                self.print_book()
-                self.book_menu()
+                return
             
             if self.menu_answer == 1:
                 self.add_book()
@@ -205,7 +185,8 @@ class Books:
                 self.del_book()
 
             if self.menu_answer == 4:
-                return
+                self.print_book()
+                self.book_menu()
 
             if self.menu_answer == 5:
                 self.look_for_user()
@@ -214,10 +195,6 @@ class Books:
             print('''NO-NO-NO, it's not an answer!''')
             self.book_menu()
         
-            
-        
-
-
 
     def add_book(self):
         id = len(self.books) + 1
@@ -236,9 +213,6 @@ class Books:
 
         self.save_to_file()
         self.book_menu()
-
-
-
 
 
     def edit(self):
@@ -277,8 +251,6 @@ class Books:
         self.book_menu()
 
 
-
-
     def del_book(self):
         self.print_book()
 
@@ -293,8 +265,6 @@ class Books:
         self.save_to_file()
         self.book_menu()
         self.book_menu()
-
-
 
 
     def look_for_user(self):
@@ -321,8 +291,6 @@ class Books:
                     print(us.first_name + " " + us.last_name)
 
         self.book_menu()
-
-
 
 
     def look_for_table(self, book):

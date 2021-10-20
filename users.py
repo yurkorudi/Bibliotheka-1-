@@ -1,8 +1,6 @@
 import json
 
 
-
-
 class User:
     id = ''
     first_name = ''
@@ -22,25 +20,9 @@ class User:
         self.books = books
 
 
-    # def create_line(self):
-    #     book = ''
-    #     for i in self.books:
-    #         book = book + str(i) + ' '
-
-    #     return str(self.id) + '|' + self.first_name + '|' + self.last_name + '|' + str(self.age) + '|' + str(self.adress) + '|' + str(self.number) + '|' + book
-
-
     def print_user(self):
         a = (str(self.id) + '    ' + self.first_name + ' ' + self.last_name + ' ' + str(self.age) + ' ' + str(self.adress) + '|' + str(self.number))
         print(json.dumps(a, indent=4, sort_keys=True))
-
-
-
-
-
-
-
-
 
 
 
@@ -54,8 +36,6 @@ class Users:
         self.ask = ask
 
 
-
-    
     def load_from_file(self):
         pass
         lines = []
@@ -72,12 +52,12 @@ class Users:
 
     def user_menu(self):
         print('##    Menu:   ##')
-        print('   0: Add user')
+        print('   0: EXIT')
         print('   1: Delete user')
         print('   2: Change user')
         print('   3: Print list user')
         print('   4: Print list user > book')
-        print('   5: EXIT')
+        print('   5: Add user')
 
         try:
             self.menu_answer = int(input('>   '))
@@ -89,7 +69,7 @@ class Users:
         if self.menu_answer <= 5 and self.menu_answer >= 0:
 
             if self.menu_answer == 0:
-                self.add_user()
+                return
             
             if self.menu_answer == 1:
                 self.del_user()
@@ -105,14 +85,11 @@ class Users:
                 self.show_users_books()
 
             if self.menu_answer == 5:
-                return
+                self.add_user()
         
         else:
             print('''NO-NO-NO, it's not an answer!''')
             self.user_menu()
-
-
-
 
 
     def add_user(self):
@@ -140,19 +117,11 @@ class Users:
             books = books.split(' ')
 
 
-        
-        
-        
-
         user = User(id, first_name, last_name, age, adress, number, books)
         self.users_list.append(user)
         self.save_users()
         self.user_menu()
 
-
-
-
-        
 
     def del_user(self):
         self.print_user()
@@ -227,16 +196,10 @@ class Users:
         self.user_menu()
 
 
-
-
-
-
-
     def insert(self, s, index, value):
         if len(value) > 9:
             value = value[0:9]
         return  s[:index] + value + s[index:]
-
 
 
     def print_user(self):
@@ -318,8 +281,7 @@ class Users:
             user_dict.append(user.__dict__)
 
         with open('user.txt', 'w') as outfile:
-            a = json.dumps(user_dict, indent=4)
-            json.dump(a, outfile)
+            json.dump(user_dict, outfile, indent=4)
 
 
     def split(self, word):
@@ -331,16 +293,12 @@ class Users:
         answer = None
         answer_list = []
 
-
-
         print('Enter user id, or enter 0 to skip>')
         answer = self.ask.func_()
 
         if int(answer) == 0:
             answer = None
             self.user_menu()
-
-
 
 
         for us in self.users_list:
@@ -359,6 +317,4 @@ class Users:
                 else:
                     print('This user is empty') 
             
-
-
         self.user_menu()
