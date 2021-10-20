@@ -65,7 +65,7 @@ class Users:
         for obg in data:
 
 
-            user = User(obg["id"], obg["first_name"], obg["last_name"], obg["age"],obg["adress"], obg["nomber"], obg["books"])
+            user = User(obg["id"], obg["first_name"], obg["last_name"], obg["age"],obg["adress"], obg["number"], obg["books"])
             self.users_list.append(user)
 
 
@@ -204,14 +204,14 @@ class Users:
             adress_int = adress
 
         
-        nomber_int = self.users_list[number-1].nomber
+        number_int = self.users_list[number-1].number
         try:
-            nomber = int(input('enter new name (old name {}): '.format(nomber_int)))
+            number = int(input('enter new name (old name {}): '.format(number_int)))
         except ValueError:
-            print("wrong nomber. Enter real!")
+            print("wrong number. Enter real!")
             self.change_user()
-        if len(nomber) != 0:
-            nomber_int = nomber
+        if len(number) != 0:
+            number_int = number
 
 
         books_int = self.users_list[number-1].books
@@ -220,7 +220,7 @@ class Users:
             books_int = books
 
 
-        user = User(id, first_name_int, last_name_int, age_int, adress_int, nomber_int, books_int)
+        user = User(id, first_name_int, last_name_int, age_int, adress_int, number_int, books_int)
         self.users_list.append(user)
         self.save_users()
         self.user_menu()

@@ -291,10 +291,10 @@ class Books:
     def look_for_user(self):
         self.print_book()
 
-        print("Enter nomber of book, you want to look> or to exit enter 0>   ")
-        nomber = self.ask.func_()
+        print("Enter number of book, you want to look> or to exit enter 0>   ")
+        number = self.ask.func_()
         try:
-            if int(nomber) == 0:
+            if int(number) == 0:
                 return
         except ValueError:
             pass
