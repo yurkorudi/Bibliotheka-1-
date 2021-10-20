@@ -110,7 +110,7 @@ class Books:
         for book in self.books:
             bookwithn = book.autors
             bookwithn = bookwithn.strip('\n')
-            self.line =  '                                 '
+            self.line =  '                                        '
 
             self.line = self.insert(self.line, 0, '+')
             self.line =self.insert(self.line,  1, str(book.id))

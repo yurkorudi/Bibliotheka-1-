@@ -279,7 +279,7 @@ class Users:
 
         for user in self.users_list:
 
-            self.line =  '                                                                                     '
+            self.line =  '                                                                                 '
             self.line = self.insert(self.line, 0, '+')
             self.line = self.insert(self.line,1, (str(user.id)))
             self.line = self.insert(self.line, 15, '+')
@@ -292,7 +292,7 @@ class Users:
             self.line = self.insert(self.line, 61, str(user.adress))
             self.line = self.insert(self.line, 75, '+')
             self.line = self.insert(self.line, 76, str(user.number))
-            self.line = self.insert(self.line, 95, '+')
+            self.line = self.insert(self.line, 90, '+')
             print(self.line)
 
 
