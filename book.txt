@@ -1,1 +1,1 @@
-[{"id": 1, "name": "jung", "publisher": "rrr", "date": "aaa", "autors": "new"}, {"id": 2, "name": "n", "publisher": "h", "date": "4", "autors": "d"}]
+[{"id": 1, "name": "jung", "publisher": "rrr", "date": "aaa", "autors": "new"}, {"id": 2, "name": "n", "publisher": "h", "date": "4", "autors": "d"}, {"id": 3, "name": "nnn", "publisher": "nnn", "date": "n", "autors": "n"}]

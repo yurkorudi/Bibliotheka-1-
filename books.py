@@ -299,11 +299,30 @@ class Books:
         except ValueError:
             pass
 
-        for bk in self.books:
-            for us in Users.users_list:
-                us.books = list(us.books[0].split(","))
-                for a in us.books:
-                    if bk.id == int(a):
+        id = self.books[number-1].id
+
+        for us in Users.users_list:
+            us.books = list(us.books[0].split(","))
+            if len(us.books) > 1:
+                for i in us.books:
+                    if int(i) == id:
                         print(us.first_name + " " + us.last_name)
+            elif len(us.books) == 1:
+                if int(us.books[0]) == id:
+                    print(us.first_name + " " + us.last_name)
+            
+
+            
+
+
+
+
+
+
+            # for us in Users.users_list:
+            #     us.books = list(us.books[0].split(",")) 
+            #     for a in us.books:
+            #         if bk.id == int(a):
+            #             print(us.first_name + " " + us.last_name)
         
         self.book_menu()
