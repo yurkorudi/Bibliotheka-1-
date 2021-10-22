@@ -1,5 +1,5 @@
 import json
-from typing import no_type_check
+from typing import ValuesView, no_type_check
 
 
 class User:
@@ -100,13 +100,8 @@ class Users:
         id = len(self.users_list) + 1
         list_to_exit = []
 
-        first_name = str(input('Enter first name:  or to exit enter 0:  '))
-        try:
-            if int(first_name) == 0:
-                self.user_menu()
-        except ValueError:
-            pass
-        last_name = str(input('Enter last name:  '))
+        first_name = self.names_input(True, None)
+        last_name = self.names_input(True, None)
         age = self.age_input()
         adress = self.adress_input()
         number = self.enter_phone_number()
@@ -150,47 +145,33 @@ class Users:
 
 
         first_name_int = self.users_list[number-1].first_name
-        name = str(input('enter new first name (old name {}): '.format(first_name_int)))
-        if len(name) != 0:
-            first_name_int = name
+        name = self.names_input(False, first_name_int)
+        
 
 
         last_name_int = self.users_list[number-1].last_name
-        name = str(input('enter new last name (old name {}): '.format(last_name_int)))
-        if len(name) != 0:
-            last_name_int = name
+        name = self.names_input(False, last_name_int)
+
 
 
         age_int = self.users_list[number-1].age
-        try:
-            age = int(input('enter new age (old name {}): '.format(age_int)))
-        except ValueError:
-            print("wrong age. Enter real!")
-            self.change_user()
-        if age != 0:
-            age_int = age
+        age = self.age_input(False, age_int)
+
 
 
         adress_int = self.users_list[number-1].adress
-        adress = str(input('enter new adress (old name {}): '.format(first_name_int)))
-        if len(name) != 0:
-            adress_int = adress
+        adress = self.adress_input(False, adress_int)
+
 
         
         number_int = self.users_list[number-1].number
-        try:
-            number = int(input('enter new phone number (old name {}): '.format(number_int)))
-        except ValueError:
-            print("wrong number. Enter real!")
-            self.change_user()
-        if len(number) != 0:
-            number_int = number
+        number = self.enter_phone_number(False, number_int)
+
 
 
         books_int = self.users_list[number-1].books
-        books = str(input('enter new books (old name {}): '.format(books_int)))
-        if len(books) != 0:
-            books_int = books
+        books = self.books_input(False, books_int)
+
 
 
         user = User(id, first_name_int, last_name_int, age_int, adress_int, number_int, books_int)
@@ -329,108 +310,164 @@ class Users:
 
 ################################################################################################################################################
 
-    def names_input(self):
-        cycle = True
-        while cycle:
-            answer = str(input('Enter>   '))
-            if '-' in answer or '1' in answer or '2' in answer or '3' in answer or '4' in answer or '5' in answer or '6' in answer or '7' in answer or '8' in answer or '9' in answer or '0' in answer:
-                print("Wrong valuse. Try real")
-            else: 
-                return answer
-
-
-    def age_input(self):
-        cycle = True 
-        while cycle:
-            try:
-                answer = int(input("Enter age>   "))
-                if answer > 3 and answer < 100:
+    def names_input(self, first, value):
+        if first == True:
+            cycle = True
+            while cycle:
+                answer = str(input('Enter name>   '))
+                if '-' in answer or '1' in answer or '2' in answer or '3' in answer or '4' in answer or '5' in answer or '6' in answer or '7' in answer or '8' in answer or '9' in answer or '0' in answer:
+                    print("Wrong valuse. Try real")
+                else: 
                     return answer
-            except ValueError:
-                print("Wrong age. Try real")
-
-
-    def adress_input(self):
-        cycle = True
-        while cycle:
-            answer = str(input("Enter your st.>  "))
-            if '-' in answer or '1' in answer or '2' in answer or '3' in answer or '4' in answer or '5' in answer or '6' in answer or '7' in answer or '8' in answer or '9' in answer or '0' in answer:
-                print("Wrong street. Try real")
-            try:
-                nb = int(input("Enter your house number"))
-                a = answer + ' st. ' + str(nb)
-                return a
-            except ValueError:
-                print("Wrong adress. Try real")
-
-
-    def books_input(self):
-        cycle = True
-        while cycle:
-            answer = str(input("Enter books for this user>   "))
-            if answer == '/n':
-                answer = []
-            if answer != []:
-                answer = answer.split(' ')
-                
-
-            books = answer
-
-            for bk in books:
-                if int(bk) > len(self.books_list.books):
-                    print("Book you antered" + str(bk) + "is not real. It was deleted")
-                    books.remove(bk)
-
-            return answer
+        elif first == False:
+            cycle = True
+            while cycle:
+                answer = str(input('Enter name, to leave {} ener 0>   '.format(value)))
+                if answer == '0':
+                    return value
+                else: 
+                    return answer
 
 
 
+    def age_input(self, first, value):
+        if first:
+            cycle = True 
+            while cycle:
+                try:
+                    answer = int(input("Enter age>   "))
+                    if answer > 3 and answer < 100:
+                        return answer
+                except ValueError:
+                    print("Wrong age. Try real")
+        elif not first:
+            cycle = True
+            while cycle:
+                try:
+                    answer = int(input("Enter age, to leave {} enter 0>   ".format(value)))
+                    if answer == 0:
+                        return value
+                    if answer > 3 and answer < 100:
+                        return answer
+                except ValueError:
+                    print("Wrong age. Try real")
 
 
-    def enter_phone_number(self):
-        cycle = True
 
-        while cycle:
-            number = str(input("Enter phone number>  "))
-
-            #if len(number) > 13:
-                # if len(number) == 12 and '38' in number:
-                
-                #     number = number.replace('38', '', 1)
-
-                # if '+' in number:
-                #     number = number.replace('+', '')
-
-                # if '-' in number:    
-                #     number = number.replace('-', '')
-
-                # if ' ' in number:
-                #     number = number.replace(' ', '')
-
-                # if len(number) == 10 and '+' not in number and '-' not in number and ' ' not in number:
-                #     try:
-                #         number = int(number)
-                #         return number
-                #     except ValueError:
-                #         print("Wrong phone number. Try real")
-            if len(number) > 9:
-                if ' ' in number:
-                    number = number.replace(' ', '')
-                if '-' in number:
-                    number = number.replace('-', '')
-                if '+' in number:
-                    number = number.replace('+', '')
-                if len(number) > 9:
-                    if '38' in number:
-                        number = number.replace('38', '', 1)
-
-
-                if len(number) >= 9 and len(number) <= 11:
+    def adress_input(self, first, value):
+        if first == True:
+            cycle = True
+            while cycle:
+                answer = str(input("Enter your st.>  "))
+                if '-' in answer or '1' in answer or '2' in answer or '3' in answer or '4' in answer or '5' in answer or '6' in answer or '7' in answer or '8' in answer or '9' in answer or '0' in answer:
+                    print("Wrong street. Try real")
+                try:
+                    nb = int(input("Enter your house number>  "))
+                    a = answer + ' st. ' + str(nb)
+                    return a
+                except ValueError:
+                    print("Wrong adress. Try real")
+        
+        elif first == False:
+            cycle = True
+            while cycle:
+                answer = str(input("Enter your st to leave {} enter 0>  ".format(value)))
+                if answer =='0':
+                    return value
+                else:
+                    if '-' in answer or '1' in answer or '2' in answer or '3' in answer or '4' in answer or '5' in answer or '6' in answer or '7' in answer or '8' in answer or '9' in answer or '0' in answer:
+                        print("Wrong street. Try real")
                     try:
-                        number = int(number)
-                        return(number)
+                        nb = int(input("Enter your house number>  "))
+                        a = answer + ' st. ' + str(nb)
+                        return a
                     except ValueError:
-                        print("Wrong phone number. Try real")
+                        print("Wrong adress. Try real")     
+
+
+    def books_input(self, first, value):
+        if first == True:
+            cycle = True
+            while cycle:
+                answer = str(input("Enter books for this user>   "))
+                if answer == '/n':
+                    answer = []
+                if answer != []:
+                    answer = answer.split(' ')
+                books = answer
+                for bk in books:
+                    if int(bk) > len(self.books_list.books):
+                        print("Book you antered" + str(bk) + "is not real. It was deleted")
+                        books.remove(bk)
+                return answer
+    
+        elif first == False:
+            cycle = True
+            while cycle:
+                answer = str(input("Enter books for this user, ot to leave {} enter 0>   ".format(value)))
+                if answer == '0':
+                    return value
+                else:
+                    if answer == '/n':
+                        answer = []
+                    if answer != []:
+                        answer = answer.split(' ')
+                    books = answer
+                    for bk in books:
+                        if int(bk) > len(self.books_list.books):
+                            print("Book you antered" + str(bk) + "is not real. It was deleted")
+                            books.remove(bk)
+                    return answer
+
+
+
+
+
+    def enter_phone_number(self, first, value):
+        if first == True:
+            cycle = True
+            while cycle:
+                number = str(input("Enter phone number>  "))
+                if len(number) > 9:
+                    if ' ' in number:
+                        number = number.replace(' ', '')
+                    if '-' in number:
+                        number = number.replace('-', '')
+                    if '+' in number:
+                        number = number.replace('+', '')
+                    if len(number) > 9:
+                        if '38' in number:
+                            number = number.replace('38', '', 1)
+                    if len(number) >= 9 and len(number) <= 11:
+                        try:
+                            number = int(number)
+                            return(number)
+                        except ValueError:
+                            print("Wrong phone number. Try real")
+        elif first == False:
+            cycle = True
+            while cycle:
+                number = str(input("Enter phone number, to leave {} enter 0>  ".format(value)))
+                if number == '0':
+                    return value
+                else:
+                    if len(number) > 9:
+                        if ' ' in number:
+                            number = number.replace(' ', '')
+                        if '-' in number:
+                            number = number.replace('-', '')
+                        if '+' in number:
+                            number = number.replace('+', '')
+                        if len(number) > 9:
+                            if '38' in number:
+                                number = number.replace('38', '', 1)
+                        if len(number) >= 9 and len(number) <= 11:
+                            try:
+                                number = int(number)
+                                return(number)
+                            except ValueError:
+                                print("Wrong phone number. Try real")
+
 
                         
 
