@@ -167,7 +167,7 @@ class Users:
         except ValueError:
             print("wrong age. Enter real!")
             self.change_user()
-        if len(age) != 0:
+        if age != 0:
             age_int = age
 
 
