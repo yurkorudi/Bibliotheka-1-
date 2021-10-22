@@ -33,5 +33,12 @@
         "publisher": "nbv",
         "date": "12345678",
         "autors": "kjhgf"
+    },
+    {
+        "id": 6,
+        "name": "name",
+        "publisher": "Thomson Reuters",
+        "date": "13 11 2002",
+        "autors": "Holland"
     }
 ]

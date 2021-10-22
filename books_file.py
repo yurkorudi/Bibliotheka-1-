@@ -1,6 +1,5 @@
 import json
 from to_int import To_int_ask
-from users import Users
 to_int = To_int_ask()
 
 class Book:
@@ -27,6 +26,7 @@ class Books:
     def __init__(self, ask):
         self.text = []
         self.ask = ask
+        self.publisher_list = []
         self.load_from_file()
 
 
@@ -41,6 +41,25 @@ class Books:
 
             book = Book(obg["id"], obg["name"], obg["publisher"], obg["date"], obg["autors"])
             self.books.append(book)
+
+
+
+        lines = []
+        file = open('publisher.txt')
+        data = json.load(file)
+
+        for obj in data['publishers']:
+            self.publisher_list.append(obj)
+        
+
+
+
+
+
+    def set_user(self, user):
+        self.user = user
+
+
 
 
     def insert(self, s, index, value):
@@ -204,8 +223,8 @@ class Books:
                 return
         except ValueError:
             pass
-        publisher = str(input('enter publisher: '))
-        date_publish = str(input('enter date: '))
+        publisher = self.publisher_input()
+        date_publish = self.date_input()
         autors = str(input('enter autor: '))
         book = Book(id, name, publisher, date_publish, autors)
         self.books.append(book)
@@ -266,6 +285,35 @@ class Books:
         self.book_menu()
 
 
+    def date_input(self):
+        cycle = True
+        error = 0
+        while cycle:
+            try:
+                day = int(input("Enter day>   "))
+                month = int(input('Enter month>   '))
+                year = int(input('Enter year>   '))
+                error = 0
+            except ValueError:
+                print('Wrong date.')
+                error += 1
+
+            if error == 0:
+                if day > 31 or day < 1:
+                    print("Wrong day")
+                    error += 1
+                if month > 12 or month < 1:
+                    print("Wrong month")
+                    error += 1
+                if year < 1600 or year > 2021:
+                    print("Wrong year")
+                    error+=1
+
+
+            if error == 0:
+                return str(day) + ' ' + str(month) + ' ' + str(year)
+            else:
+                print("Try again!")
 
 
     def look_for_table(self, book):
@@ -274,7 +322,7 @@ class Books:
         
         id = self.books[target.id-1].id
 
-        for us in Users.users_list:
+        for us in self.user.users_list:
             us.books = list(us.books[0].split(","))
             for chek in us.books:
                 if chek != '':
@@ -286,6 +334,27 @@ class Books:
             resoult = 'Nobody'
 
         return resoult
+
+
+
+    def publisher_input(self):
+        cycle = 0
+        print("choose one of given publishers")
+        for obj in self.publisher_list:
+            print(str(cycle)+') ' + obj)
+            cycle += 1
+
+
+        cycle = True
+        while True:
+            try:
+                answer = int(input("Enter answer>   "))
+                if answer > len(self.publisher_list) or answer < 0:
+                    print("Wrong answer. Try real")
+                else:
+                    return self.publisher_list[answer]
+            except ValueError:
+                print("Wrong answer. Try real")
 
 
 

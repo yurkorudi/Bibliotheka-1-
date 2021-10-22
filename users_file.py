@@ -1,4 +1,5 @@
 import json
+from typing import no_type_check
 
 
 class User:
@@ -30,14 +31,12 @@ class Users:
 
     users_list = []
 
-    def __init__(self, book, ask):
+    def __init__(self, ask):
         self.load_from_file()
-        self.book = book
         self.ask = ask
 
 
     def load_from_file(self):
-        pass
         lines = []
 
         file = open('user.txt')
@@ -48,6 +47,11 @@ class Users:
 
             user = User(obg["id"], obg["first_name"], obg["last_name"], obg["age"],obg["adress"], obg["number"], obg["books"])
             self.users_list.append(user)
+
+
+    def set_books(self, books):
+        self.books_list = books
+
 
 
     def user_menu(self):
@@ -103,27 +107,20 @@ class Users:
         except ValueError:
             pass
         last_name = str(input('Enter last name:  '))
-        print('Enter age:  ')
-        age = self.ask.func_()
-        if age > 100 or age < 3:
-            print('Wrong age. Please try with real.')
-            self.add_user() 
-        adress = str(input('Enter adress:  '))
-        print('Enter phone number:   ')
-        number = self.ask.func_()
-        books = str(input('Id of books (if not, press enter)'))
+        age = self.age_input()
+        adress = self.adress_input()
+        number = self.enter_phone_number()
+        books = self.books_input()
 
-        if books == '/n':
-            books = []
 
-        if books != []:
-            books = books.split(' ')
 
 
         user = User(id, first_name, last_name, age, adress, number, books)
         self.users_list.append(user)
         self.save_users()
         self.user_menu()
+
+
 
 
     def del_user(self):
@@ -138,6 +135,9 @@ class Users:
         del self.users_list[number-1]
         self.save_users()
         self.user_menu()
+
+
+
 
     def change_user(self):
         self.print_user()
@@ -197,6 +197,8 @@ class Users:
         self.users_list.append(user)
         self.save_users()
         self.user_menu()
+
+
 
 
     def insert(self, s, index, value):
@@ -309,15 +311,113 @@ class Users:
                 if len(us.books) > 0:
                     for id_book in us.books:
                         id_book = list(id_book.split(","))
-                        for obj1 in self.book.books:
+                        for obj1 in self.books_list.books:
                             for var in id_book:
-                                try:
+                                if var != '':
                                     if obj1.id == int(var):
-                                        print('Here you have: ' + obj1.name)
-                                except ValueError:
-                                    print('This user is empty')
+                                        answer_list.append(obj1.name)
+                             
+                            for name in answer_list:
+                                print('This youser have' + name)
+                        if answer_list == []:
+                            print("This user haven't any book")
 
-                else:
-                    print('This user is empty') 
+                
+
             
         self.user_menu()
+
+################################################################################################################################################
+
+    def names_input(self):
+        cycle = True
+        while cycle:
+            answer = str(input('Enter>   '))
+            if '-' in answer or '1' in answer or '2' in answer or '3' in answer or '4' in answer or '5' in answer or '6' in answer or '7' in answer or '8' in answer or '9' in answer or '0' in answer:
+                print("Wrong valuse. Try real")
+            else: 
+                return answer
+
+
+    def age_input(self):
+        cycle = True 
+        while cycle:
+            try:
+                answer = int(input("Enter age>   "))
+                if answer > 3 and answer < 100:
+                    return answer
+            except ValueError:
+                print("Wrong age. Try real")
+
+
+    def adress_input(self):
+        cycle = True
+        while cycle:
+            answer = str(input("Enter your st.>  "))
+            if '-' in answer or '1' in answer or '2' in answer or '3' in answer or '4' in answer or '5' in answer or '6' in answer or '7' in answer or '8' in answer or '9' in answer or '0' in answer:
+                print("Wrong street. Try real")
+            try:
+                nb = int(input("Enter your house number"))
+                a = answer + ' st. ' + str(nb)
+                return a
+            except ValueError:
+                print("Wrong adress. Try real")
+
+
+    def books_input(self):
+        cycle = True
+        while cycle:
+            answer = str(input("Enter books for this user>   "))
+            if books == '/n':
+                books = []
+            if books != []:
+                books = books.split(' ')
+
+            for bk in books:
+                if bk > len(self.books.books):
+                    print("Book you antered" + str(bk) + "is not real. It was deleted")
+                    books.remove(bk)
+
+            return books
+
+
+
+
+
+    def enter_phone_number(self):
+        cycle = True
+
+        while cycle:
+            number = str(input("Enter phone number>  "))
+
+            if len(number) > 13:
+                if len(number) == 12 and '38' in number:
+                
+                    number = number.replace('38', '', 1)
+
+                if '+' in number:
+                    number = number.replace('+', '')
+
+                if '-' in number:    
+                    number = number.replace('-', '')
+
+                if ' ' in number:
+                    number = number.replace(' ', '')
+
+                if len(number) == 10 and '+' not in number and '-' not in number and ' ' not in number:
+                    try:
+                        number = int(number)
+                        return number
+                    except ValueError:
+                        print("Wrong phone number. Try real")
+
+
+
+
+
+
+            
+
+
+
+

@@ -1,0 +1,11 @@
+{
+  "publishers": [
+    "Thomson Reuters",
+    "Penguin Random House",
+    "Hachette Livre",
+    "HarperCollins",
+    "Macmillan Publishers",
+    "Bertelsmann",
+    "Scholastic Corporation"
+  ]
+}
