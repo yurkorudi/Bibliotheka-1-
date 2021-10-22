@@ -368,17 +368,20 @@ class Users:
         cycle = True
         while cycle:
             answer = str(input("Enter books for this user>   "))
-            if books == '/n':
-                books = []
-            if books != []:
-                books = books.split(' ')
+            if answer == '/n':
+                answer = []
+            if answer != []:
+                answer = answer.split(' ')
+                
+
+            books = answer
 
             for bk in books:
-                if bk > len(self.books.books):
+                if int(bk) > len(self.books_list.books):
                     print("Book you antered" + str(bk) + "is not real. It was deleted")
                     books.remove(bk)
 
-            return books
+            return answer
 
 
 
@@ -390,26 +393,46 @@ class Users:
         while cycle:
             number = str(input("Enter phone number>  "))
 
-            if len(number) > 13:
-                if len(number) == 12 and '38' in number:
+            #if len(number) > 13:
+                # if len(number) == 12 and '38' in number:
                 
-                    number = number.replace('38', '', 1)
+                #     number = number.replace('38', '', 1)
 
-                if '+' in number:
-                    number = number.replace('+', '')
+                # if '+' in number:
+                #     number = number.replace('+', '')
 
-                if '-' in number:    
-                    number = number.replace('-', '')
+                # if '-' in number:    
+                #     number = number.replace('-', '')
 
+                # if ' ' in number:
+                #     number = number.replace(' ', '')
+
+                # if len(number) == 10 and '+' not in number and '-' not in number and ' ' not in number:
+                #     try:
+                #         number = int(number)
+                #         return number
+                #     except ValueError:
+                #         print("Wrong phone number. Try real")
+            if len(number) > 9:
                 if ' ' in number:
                     number = number.replace(' ', '')
+                if '-' in number:
+                    number = number.replace('-', '')
+                if '+' in number:
+                    number = number.replace('+', '')
+                if len(number) > 9:
+                    if '38' in number:
+                        number = number.replace('38', '', 1)
 
-                if len(number) == 10 and '+' not in number and '-' not in number and ' ' not in number:
+
+                if len(number) >= 9 and len(number) <= 11:
                     try:
                         number = int(number)
-                        return number
+                        return(number)
                     except ValueError:
                         print("Wrong phone number. Try real")
+
+                        
 
 
 
